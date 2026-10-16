@@ -25,7 +25,12 @@ class JaarTest {
     }
 
     @Test
-    void toStringGeeftHetJaarAlsTekst() {
-        Assertions.assertThat(new Jaar(2024).toString()).isEqualTo("2024");
+    void toStringGeeftHetJaarAlsTekstMetIsEqualTo() {
+        Assertions.assertThat(new Jaar(2015).toString()).isEqualTo("2015");
+    }
+
+    @Test
+    void toStringGeeftHetJaarAlsTekstMetHasToString() {
+        Assertions.assertThat(new Jaar(2015)).hasToString("2015");
     }
 }
