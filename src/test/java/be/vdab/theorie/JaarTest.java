@@ -35,4 +35,14 @@ class JaarTest {
     void toStringGeeftHetJaarAlsTekstMetHasToString() {
         Assertions.assertThat(new Jaar(2015)).hasToString("2015");
     }
+
+    @Test
+    void jarenMetHetzelfdeJaartalZijnGelijk() {
+        Assertions.assertThat(new Jaar(2015)).isEqualTo(new Jaar(2015));
+    }
+
+    @Test
+    void jarenMetEenVerschillendJaartalZijnVerschillend() {
+        Assertions.assertThat(new Jaar(2015)).isNotEqualTo(new Jaar(2016));
+    }
 }

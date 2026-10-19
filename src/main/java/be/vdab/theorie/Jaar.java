@@ -21,4 +21,9 @@ class Jaar {
     public String toString() {
         return String.valueOf(jaar);
     }
+
+    @Override
+    public boolean equals(Object object) {
+        return object instanceof Jaar anderJaar && jaar == anderJaar.jaar;
+    }
 }
