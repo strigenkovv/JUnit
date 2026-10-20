@@ -26,4 +26,9 @@ class Jaar {
     public boolean equals(Object object) {
         return object instanceof Jaar anderJaar && jaar == anderJaar.jaar;
     }
+
+    @Override
+    public int hashCode() {
+        return jaar;
+    }
 }

@@ -45,4 +45,9 @@ class JaarTest {
     void jarenMetEenVerschillendJaartalZijnVerschillend() {
         Assertions.assertThat(new Jaar(2015)).isNotEqualTo(new Jaar(2016));
     }
+
+    @Test
+    void deHashCodeVanGelijkeJarenIsGelijk() {
+        Assertions.assertThat(new Jaar(2015)).hasSameHashCodeAs(new Jaar(2015));
+    }
 }
