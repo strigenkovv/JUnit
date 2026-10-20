@@ -1,6 +1,8 @@
 package be.vdab.theorie;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 import java.math.BigDecimal;
 
@@ -33,5 +35,22 @@ class RekeningTest {
         rekening.stort(BigDecimal.ONE);
 
         assertThat(rekening.getSaldo()).isEqualByComparingTo("11");
+    }
+
+    @Test
+    void hetGestorteBedragMagNietNulZijn() {
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> rekening.stort(BigDecimal.ZERO));
+    }
+
+    @Test
+    void hetGestorteBedragMagNietNegatiefZijn() {
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> rekening.stort(BigDecimal.valueOf(-1)));
+    }
+
+    @Test
+    void stortMetNullKanNiet() {
+        assertThatNullPointerException().isThrownBy(() -> rekening.stort(null));
     }
 }
