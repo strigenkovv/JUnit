@@ -1,5 +1,7 @@
 package be.vdab.oefeningen;
 
+import java.util.Objects;
+
 class Rechthoek {
     private final int lengte;
     private final int breedte;
@@ -15,5 +17,17 @@ class Rechthoek {
 
     int getOmtrek() {
         return 2 * (lengte + breedte);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return object instanceof Rechthoek andereRechthoek
+                && lengte == andereRechthoek.lengte
+                && breedte == andereRechthoek.breedte;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lengte, breedte);
     }
 }
