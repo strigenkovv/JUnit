@@ -1,51 +1,30 @@
 package be.vdab.oefeningen;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.Test;
 
 class ISBNTest {
 
-    @Test
-    void ISBN9789027439642IsCorrect() {
-        new ISBN(9789027439642L);
+    @ParameterizedTest
+    @ValueSource(longs = {9789027439642L, 9790000000001L, 9780200000000L})
+    void correcteISBNs(long nummer) {
+        new ISBN(nummer);
     }
 
-    @Test
-    void ISBN978902743964IsTeKort() {
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> new ISBN(978902743964L));
+    @ParameterizedTest
+    @ValueSource(longs = {978902743964L, 97890274396420L})
+    void eenISBNMoet13CijfersBevatten(long nummer) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new ISBN(nummer));
     }
 
-    @Test
-    void ISBN97890274396420IsTeLang() {
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> new ISBN(97890274396420L));
-    }
-
-    @Test
-    void ISBN9779027439642HeeftEenVerkeerdeStart() {
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> new ISBN(9779027439642L));
-    }
-
-
-    @Test
-    void ISBN9789027439643HeeftEenVerkeerdControlegetal() {
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> new ISBN(9789027439643L));
-    }
-
-
-    @Test
-    void ISBN9790000000001IsCorrect() {
-        new ISBN(9790000000001L);
-    }
-
-    @Test
-    void ISBN9780200000000IsCorrect() {
-        new ISBN(9780200000000L);
+    @ParameterizedTest
+    @ValueSource(longs = {9779027439642L, 9789027439643L})
+    void eenISBNMoetEenJuisteStartEnControlegetalHebben(long nummer) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new ISBN(nummer));
     }
 
     @Test
