@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Stream;
 
-class PersoonRepositoryStub extends PersoonRepository {
+class PersoonRepositoryStub extends CsvPersoonRepository {
     // Учебный пример Stub. В PersoonServiceTest теперь используется Mockito Mock.
     @Override
     List<BigDecimal> findAllWeddes() {

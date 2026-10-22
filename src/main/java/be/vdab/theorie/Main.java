@@ -2,11 +2,20 @@ package be.vdab.theorie;
 
 class Main {
     void main() {
+        var keuze = Integer.parseInt(
+                IO.readln("1=personen.csv, 2=personen.xml: "));
+        while (keuze != 1 && keuze != 2) {
+            keuze = Integer.parseInt(
+                    IO.readln("Verkeerde keuze, probeer opnieuw: "));
+        }
+        PersoonRepository repository = keuze == 1
+                ? new CsvPersoonRepository()
+                : new XmlPersoonRepository();
+        var service = new PersoonService(repository);
         try {
-            var service = new PersoonService(new PersoonRepository());
-            System.out.println(service.standaardAfwijkingWeddes());
+            IO.println(service.standaardAfwijkingWeddes());
         } catch (RepositoryException ex) {
-            System.out.println("Kan personen niet lezen.");
+            IO.println("Kan personen niet lezen.");
             ex.printStackTrace(System.err);
         }
     }
