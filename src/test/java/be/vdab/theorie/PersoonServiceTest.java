@@ -10,7 +10,7 @@ class PersoonServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        service = new PersoonService();
+        service = new PersoonService(new PersoonRepository());
     }
 
     @Test
