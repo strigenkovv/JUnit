@@ -1,0 +1,26 @@
+package be.vdab.theorie;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
+
+class PersoonService {
+    private final PersoonRepository repository = new PersoonRepository();
+
+    BigDecimal standaardAfwijkingWeddes() {
+        var weddes = repository.findAllWeddes();
+        var totaal = weddes.stream()
+                .reduce(BigDecimal.ZERO,
+                        (vorigTotaal, huidigeWedde) -> vorigTotaal.add(huidigeWedde));
+        var gemiddelde = totaal.divide(
+                BigDecimal.valueOf(weddes.size()), 2, RoundingMode.HALF_UP);
+        totaal = weddes.stream()
+                .map(wedde -> wedde.subtract(gemiddelde))
+                .map(verschil -> verschil.pow(2))
+                .reduce(BigDecimal.ZERO,
+                        (vorigTotaal, huidigKwadraat) -> vorigTotaal.add(huidigKwadraat));
+        var variantie = totaal.divide(
+                BigDecimal.valueOf(weddes.size()), 2, RoundingMode.HALF_UP);
+        return variantie.sqrt(new MathContext(10, RoundingMode.HALF_UP));
+    }
+}
